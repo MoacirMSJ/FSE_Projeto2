@@ -1,6 +1,6 @@
 #include "pwm.h"
 
-
+//modo 0 pino tipo entrada modo 1 pino saida
 int criarPinosPWM(int pino1, int modo){
   wiringPiSetup();
   if(modo == 1){
@@ -8,19 +8,17 @@ int criarPinosPWM(int pino1, int modo){
   }
   else{
     pinMode(pino1, OUTPUT);
+    if(softPwmCreate (pino1, LOW, HIGH ) !=0){
+      printf("Erro ao criar pino PWM %d.\n",pino1);
+      return -1;
+    }
   }
   
-
-  if(softPwmCreate (pino1, 0, 100) !=0){
-    printf("Erro ao criar pino PWM %d.\n",pino1);
-    return -1;
-  }
-
   return 1;
 }
 
 void enviarIntensidadePWM(int pino, int pid_intensidade){
-  softPwmWrite (pino, pid_intensidade);
+  softPwmWrite (pino, );
 }
 
 int retornarValorPino(int pino){
@@ -28,8 +26,14 @@ int retornarValorPino(int pino){
 }
 
 void zeraIntensidadePWM(int pino1){
-  softPwmWrite (pino1, 0);
+  softPwmWrite (pino1, LOW);
   // printf("-> Ventoinha e resistor desligaods...\n");
+}
+
+void criarVariosPinos(int modo, int *pinos, int tm){
+  for(int i =0;i<tm; i++){
+    criarPinosPWM(pinos[i],mode);
+  }
 }
 
 // int w = wiringPiSetup();

@@ -9,6 +9,7 @@ int criarPinosPWM(int pino1, int modo);
 void enviarIntensidadePWM(int pino, int pid_intensidade);
 int retornarValorPino(int pino);
 void zeraIntensidadePWM(int p1);
+void criarVariosPinos(int modo, int *pinos, int tm);
 
 
 #endif /* PWM_H_ */
