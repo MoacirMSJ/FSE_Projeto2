@@ -15,7 +15,7 @@ void subMenu(){
 void finaliza(int s){
   printf("Finalizando...\n");
   printf("pwm: %d %d",RESISTORPWM,VENTOINHAPWM);
-  zeraIntensidadePWM(RESISTORPWM, VENTOINHAPWM);
+  zeraIntensidadePWM(RESISTORPWM);
   ClrLcd();
   fecharArquivoUART();
   fecharArquivoLog();

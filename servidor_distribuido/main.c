@@ -8,6 +8,7 @@
 #include "pwm.h"
 #include "tipos.h"
 #include "diversos.h"
+#include "tcp.h"
 
 #define Kp 5.0
 #define Ki 1.0
@@ -33,64 +34,7 @@ void abreMenu();
 void verificaTemperaturas(DadosUart dados, float tExterna);
 
 int main(){
-  // novoRegistro();
-  // menu();
-  // signal(SIGINT,finaliza);
-  // signal(SIGALRM,alarme); 
-  // signal(SIGTSTP, abreMenu);
-  // pid_configura_constantes(Kp,Ki,Kd);
-  // criarPinosPWM(17,1);
-  // enviarIntensidadePWM(17, HIGH);
-  // sleep(5);
-
-  // system("clear");
-  // while(1){
-  //   subMenu();
-  //   alarm(1);
-  //   pid_atualiza_referencia(temperaturaDesejada);
-
-  //   dados = solicitarDadosUART();
-  //   tExterna= bmeTempExterna();
-  //   if(modo == 'p'){
-  //     temperaturaDesejada =  dados.potenciometro;
-  //   }
-  //   verificaTemperaturas(dados, tExterna);
-    
-  //   float pid = (float ) pid_controle(dados.sensorLM35);
-
-  //   if(pid <= -40.0 ){
-  //     //desliga resistenca e ligar ventoinha
-  //     pidAux.ventoinha = pid;
-  //     pidAux.resistencia = 0.0;
-  //     enviarIntensidadePWM(VENTOINHAPWM, (-1)*pid);
-  //     enviarIntensidadePWM(RESISTORPWM, 0);
-  //   }
-  //   else if(pid >=1){
-  //      //desliga ventoinha e liga resistencia.
-  //     pidAux.ventoinha = 0.0;
-  //     pidAux.resistencia = pid;
-  //     enviarIntensidadePWM(RESISTORPWM, pid);
-  //     enviarIntensidadePWM(VENTOINHAPWM, 0);
-  //   }
-  //   else{
-  //     //desliga os 2;
-  //     pidAux.ventoinha = 0.0;
-  //     pidAux.resistencia = 0.0;
-  //     zeraIntensidadePWM(RESISTORPWM, VENTOINHAPWM);
-  //   }
- 
-
-
-  //   // medirTempo(tempo);
-  //   registrarLog(dados, tExterna, temperaturaDesejada, pidAux);
-  //   mostrarDados(dados, tExterna, temperaturaDesejada, pidAux );
-  //   // printf("Horario %d:%02d:%02d\n",tempo.tm_hora, tempo.tm_min, tempo.tm_seg);
-  //   // printf("TI: %.2f |TE: %.2f |TR: %.2f |V: %.2f%% |R: %.2f%%\n",dados.sensorLM35, tExterna, temperaturaDesejada,abs(pidAux.ventoinha), pidAux.resistencia);
-
-  //   pause();
-  //   system("clear");
-  // }
-
+  servidor();
   return 0;
 }
 

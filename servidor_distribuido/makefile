@@ -1,8 +1,11 @@
 start:temp main clear
 
-main:log lcd pid bme280 uart pwm diversos
+main:log lcd pid bme280 uart pwm diversos tcp
 	gcc -I./lib  main.c ./temp/*.o -o ./obj/bin -lwiringPi -lpthread
 	# gcc -I./lib  main.c ./temp/log.o ./temp/lcd.o ./temp/pid.o -o ./obj/bin -lwiringPi
+
+tcp:
+	gcc -c ./lib/tcp.c -o ./temp/tcp.o
 
 temp:
 	mkdir ./temp

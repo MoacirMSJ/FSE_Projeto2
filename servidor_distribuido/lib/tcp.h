@@ -7,9 +7,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include "pwm.h"
+
 
 
 #define PORTA 10126
 
+void servidor();
 
 #endif /* PWM_H_ */
