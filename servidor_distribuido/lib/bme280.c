@@ -1,12 +1,11 @@
 #include "bme280.h"
 
-
-float bmeTempExterna(){
-	float temp = tempExterna();
-	if(temp == -1){
+TempUmidade valorTemperaturaUmidade(){
+	TempUmidade temp = dadosTemperaturaHumidade();
+	if(temp.temperatura == -1 || temp.umidade ==-1 ){
 		for(int i=0; i<3;i++){
-			temp = tempExterna();
-			if(temp != -1){
+			temp = dadosTemperaturaHumidade();
+			if(temp.temperatura != -1 || temp.umidade != -1 ){
 				return temp;
 			}
 		}
@@ -14,10 +13,10 @@ float bmeTempExterna(){
 	return temp;
 }
 
-float tempExterna(){
+TempUmidade dadosTemperaturaHumidade(){
   int r = bme280Init(1,BME280_ADRESS);
   int T,P,H;
-  float result;
+  TempUmidade result;
 
   if (r != 0)
 	{
@@ -25,7 +24,8 @@ float tempExterna(){
 	}
   bme280ReadValues(&T, &P, &H);
 
-  result = (float)T/100.0;
+  result.temperatura = (float)T/100.0;
+	resutl.umidade = (float)H/1024;
 
   return result;
 

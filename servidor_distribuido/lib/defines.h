@@ -1,9 +1,5 @@
-#ifndef PWM_H_
-#define PWM_H_
-
-#include <stdio.h>
-#include <wiringPi.h>
-#include <softPwm.h>
+#ifndef DEFINES_H_
+#define DEFINES_H_
 
 #define LAP_COZINHA 0
 #define LAP_SALA 1 
@@ -21,15 +17,4 @@
 #define SA_JANELA_SALA 27
 #define SA_JANELA_QUARTO_1 28
 #define SA_JANELA_QUARTO_2 29
-
-
-
-int criarPinosPWM();
-void enviarIntensidadePWM(int pino, int pid_intensidade);
-int retornarValorPino(int pino);
-void zeraIntensidadePWM(int pino1);
-void desligaTudo();
-int verificaSeSensolesEstaoDesligados();
-
-
-#endif /* PWM_H_ */
+#endif /* DEFINES_H_ */

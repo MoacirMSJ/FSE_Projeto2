@@ -17,6 +17,11 @@
 #include <sys/ioctl.h>
 #include <linux/i2c-dev.h>
 
+typedef struct tempUmidade{
+	float temperatura;
+	float umidade;
+} TempUmidade;
+
 #define BME280_ADRESS 0x76
 
 static int file_i2c = 0;
@@ -30,9 +35,9 @@ static int calH1, calH2, calH3, calH4, calH5, calH6;
 // into auto sensing mode
 //
 void fecharArquivoI2C();
-float bmeTempExterna();
+TempUmidade valorTemperaturaUmidade();
 int bme280Init(int iChannel, int iAddr);
 int bme280ReadValues(int *T, int *P, int *H);
-float tempExterna();
+TempUmidade dadosTemperaturaHumidade();
 
 #endif // __BME280__
