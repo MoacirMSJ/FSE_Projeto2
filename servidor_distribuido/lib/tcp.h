@@ -8,11 +8,13 @@
 #include <string.h>
 #include <unistd.h>
 #include "pwm.h"
-
+#include "monitoramento.h"
+#include "bme280.h"
 
 
 #define PORTA 10126
 
 void servidor();
+void cliente(char *mensagem);
 
-#endif /* PWM_H_ */
+#endif /* TCP_H_ */
