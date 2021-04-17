@@ -1,5 +1,5 @@
-#ifndef TCP_H_
-#define TCP_H_
+#ifndef SERVIDOR_H_
+#define SERVIDOR_H_
 
 #include <stdio.h>
 #include <sys/socket.h>
@@ -14,7 +14,10 @@
 
 #define PORTA 10126
 
-void servidor();
-void cliente(char *mensagem);
+int servidorSocket, clienteSocket;
 
-#endif /* TCP_H_ */
+
+void servidor();
+
+
+#endif /* SERVIDOR_H_ */
