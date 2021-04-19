@@ -29,11 +29,12 @@ void trataRequisicao(int clienteSocket) {
 		case '0': ;
 			printf("Temperatura\n");
 			// Dados temp, umi;
-			// TempUmidade tempUmidade = valorTemperaturaUmidade();
-			// temp.valor = tempUmidade.temperatura;
-			// umi.valor = tempUmidade.umidade;
-			float temp = 35.0;
-			float umi = 80.0;
+			TempUmidade tempUmidade = valorTemperaturaUmidade();
+			float temp = 0;
+			float umi = 0;
+			temp = tempUmidade.temperatura;
+			umi = tempUmidade.umidade;
+			
 			// printf("temp: %f\n", temp);
 			char teste[4];
 			sprintf(teste, "%.3f", temp);
