@@ -8,7 +8,7 @@
 #include <string.h>
 #include <unistd.h>
 #define SERVIDOR_PORTA 10126
-#define SERVIDOR_IP "127.0.0.1"
+#define SERVIDOR_IP "192.168.0.4"
 
 typedef struct entrada{
   char nome_aparelho[20];
