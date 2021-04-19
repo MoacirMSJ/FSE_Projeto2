@@ -18,11 +18,11 @@ void mostrarStatus(){
   printf("| SALA: %c",aparelhos_status[1]);
   printf("| QUARTO 01: %c",aparelhos_status[2]);
   printf("| QUARTO 02: %c |\n",aparelhos_status[3]);
-  printf("|_____________________________________________|\n")  
+  printf("|_____________________________________________|\n");  
   printf(" ___________AR-CONDICIONADOS__________\n");
   printf("| QUARTO 01: %c",aparelhos_status[4]);
   printf("| QUARTO 02: %c |\n",aparelhos_status[5]);
-  printf("|______________________________________|\n") 
+  printf("|______________________________________|\n");
 
   printf("_______ALARME______\n");
   printf(" LIGADO: %d\n",alarme_ativado);
@@ -192,6 +192,7 @@ void* enviaComando(void *entrada){
     }
   }
 
+  registrarLog(ent->nome_aparelho, ent->instrucao[2], response);
 }
 
 
@@ -219,12 +220,7 @@ void gerenciaAlarme(){
 
 void finaliza(int s){
   printf("Finalizando...\n");
-  // printf("pwm: %d %d",RESISTORPWM,VENTOINHAPWM);
-  // zeraIntensidadePWM(RESISTORPWM, VENTOINHAPWM);
-  // ClrLcd();
-  // fecharArquivoUART();
-  // fecharArquivoLog();
-  // fecharArquivoI2C();
+  fecharArquivoLog();
   exit(1);
 }
 
@@ -280,15 +276,15 @@ void * solicitaTempUmidade(void *test){
   
 }
 
-void  *solicitacaoUsuario(void *teste){
+// void  *solicitacaoUsuario(void *teste){
   
-  system("clear");
-  printf("Slicita Lampada: \n");
-  cliente("1510",1);
-  sleep(2);
-  desbloqueiaImpressaoTempUmidade();
+//   system("clear");
+//   printf("Slicita Lampada: \n");
+//   cliente("1510",1);
+//   sleep(2);
+//   desbloqueiaImpressaoTempUmidade();
   
-}
+// }
 
 void abreMenu(){
   bloqueiaImpressaoTempUmidade();
