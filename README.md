@@ -41,7 +41,7 @@ O objetivo deste trabalho é implementar um sistema distribuído,funcionando em 
 
       4.2. Servidor Central.
 
-        ./obj/bin
+        ./bin/bin
 
 5. No servidor Central as instruções de uso serão apresentadas.
 
