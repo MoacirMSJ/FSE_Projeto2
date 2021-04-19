@@ -3,9 +3,11 @@
 
 #include <stdio.h>
 #include <pthread.h>
-#include "cliente.h"
 #include <signal.h>
+#include <time.h>
 #include "servidor.h"
+#include "log.h"
+#include "cliente.h"
 
 pthread_t auxiliar;
 pthread_t threadMonitoramento;

@@ -3,22 +3,30 @@
 char aparelhos_status[6] ={'0','0','0','0','0','0'};
 
 
+void tempo()
+{
+  time_t t = time(NULL);
+  struct tm tm = *localtime(&t);
+  printf("now: %d-%02d-%02d %02d:%02d:%02d\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
+}
+
 void mostrarStatus(){
   system("clear");
   printf("\t\tAPARELHOS\n");
-  printf("LAMPADAS\n");
-  printf("\tCOZINHA: %c",aparelhos_status[0]);
-  printf("\tSALA: %c",aparelhos_status[1]);
-  printf("\tQUARTO 01: %c",aparelhos_status[2]);
-  printf("\tQUARTO 02: %c\n",aparelhos_status[3]);
-  
-  printf("AR-CONDICIONADOS\n");
-  printf("\tQUARTO 01: %c",aparelhos_status[4]);
-  printf("\tQUARTO 02: %c\n",aparelhos_status[5]);
+  printf(" ________________LAMPADAS_____________________\n");
+  printf("|COZINHA: %c",aparelhos_status[0]);
+  printf("| SALA: %c",aparelhos_status[1]);
+  printf("| QUARTO 01: %c",aparelhos_status[2]);
+  printf("| QUARTO 02: %c |\n",aparelhos_status[3]);
+  printf("|_____________________________________________|\n")  
+  printf(" ___________AR-CONDICIONADOS__________\n");
+  printf("| QUARTO 01: %c",aparelhos_status[4]);
+  printf("| QUARTO 02: %c |\n",aparelhos_status[5]);
+  printf("|______________________________________|\n") 
 
-  printf("ALARME\n");
-  printf("\tLIGADO: %d\n",alarme_ativado);
-
+  printf("_______ALARME______\n");
+  printf(" LIGADO: %d\n",alarme_ativado);
+  printf("___________________\n");
 }
 
 
