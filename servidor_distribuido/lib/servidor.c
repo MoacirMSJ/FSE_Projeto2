@@ -1,63 +1,81 @@
+#include <time.h>
 #include "servidor.h"
-
 #define SUCESSO "Ok"
 #define ERROR "Falha"
 
 
 
-union Dados{
+typedef union {
 	float valor;
-	char valor_string[4];
-};
+	unsigned char valor_string[4];
+}Dados;
 
 void trataRequisicao(int clienteSocket) {
+	printf("Chegou\n");
 	char buffer[16];
 	int tamanhoRecebido;
 
-	if((tamanhoRecebido = recv(clienteSocket, buffer, 10, 0)) < 0)
+	if((tamanhoRecebido = recv(clienteSocket, buffer, 5, 0)) < 0)
 		printf("Erro no recv()\n");	
 	
+	int pino = buffer[1] - '0';
+	int intencidade = ((buffer[2] - '0') == 0)? 0:1;
+	printf("------------------------------------\n");
+	time_t t = time(NULL);
+  struct tm tm = *localtime(&t);
+  printf("%d-%02d-%02d %02d:%02d:%02d\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
 	switch(buffer[0]){
-		int pino = buffer[1] - '0';
-		int intencidade = ((buffer[2] - '0') == 0)? 0:1;
 		// temperatura e umidade
-		case '0':
-			Dados temp, umi;
-			TempUmidade tempUmidade = valorTemperaturaUmidade();
-			temp.valor = tempUmidade.temperatura;
-			umi.valor = tempUmidade.umidade;
-
-			strcat(buffer, temp.valor_string);
-   		strcat(buffer, umi.valor_string);
+		case '0': ;
+			printf("Temperatura\n");
+			// Dados temp, umi;
+			// TempUmidade tempUmidade = valorTemperaturaUmidade();
+			// temp.valor = tempUmidade.temperatura;
+			// umi.valor = tempUmidade.umidade;
+			float temp = 35.0;
+			float umi = 80.0;
+			// printf("temp: %f\n", temp);
+			char teste[4];
+			sprintf(teste, "%.3f", temp);
+			memcpy(buffer, teste,4);
+			sprintf(teste, "%.3f", umi);
+   		memcpy(&buffer[4], teste,4);
 			tamanhoRecebido = 8;
 			break;
 
 		// Lampadas
-		case '1':
-			enviarIntensidadePWM(pino,intencidade);
-			printf("Lampada intencidade: %d\n",intencidade);
+		case '1': ;
+			// enviarIntensidadePWM(pino,intencidade);
+			printf("Lampada endreco %d intencidade: %d\n",pino,intencidade);
 			strcpy(buffer, SUCESSO);
 			tamanhoRecebido=3;
 			break;
 		// Ar-condicionado
-		case '2':
-			
-			enviarIntensidadePWM(pino, intencidade);
+		case '2': ;
+			if(buffer[1] == 'A'){
+				pino = 23;
+			}
+			else{
+				pino = 24;
+			}
+			// enviarIntensidadePWM(pino, intencidade);
+			printf("Endereco ar: %d\n",pino);
 			printf("Ar-condicionado intencidade: %d\n",intencidade);
 			strcpy(buffer, SUCESSO);
 			tamanhoRecebido=3;
 			break;
 		//Ligar Alarme
-		case '3':
+		case '3': ;
+			printf("Alarme ligando/desligando\n");
 			if(verificaSeSensolesEstaoDesligados() != 0){
-				printf("Error: Algum sensor de presença está com acionado\n");
+				printf("Error: Algum sensor de presenca está com acionado\n");
 				strcpy(buffer, ERROR);
 				tamanhoRecebido=6;
 			}
 			else{
 				if(monitorarTodosPinos() < 0){
 					printf("Erro ao ativar monitoramento");
-					strcpy(buffer, error);
+					strcpy(buffer, ERROR);
 					tamanhoRecebido=6;
 
 				}else{
@@ -73,7 +91,7 @@ void trataRequisicao(int clienteSocket) {
 			printf("Não reconhecido\n");
 
 	}
-
+	printf("Tamanho recebido: %d\n", tamanhoRecebido);
 	while (tamanhoRecebido > 0) {
 		if(send(clienteSocket, buffer, tamanhoRecebido, 0) != tamanhoRecebido)
 			printf("Erro no envio - send()\n");
