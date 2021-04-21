@@ -1,5 +1,6 @@
 #include <time.h>
 #include "servidor.h"
+#include "log.h"
 #define SUCESSO "Ok"
 #define ERROR "Falha"
 
@@ -10,8 +11,15 @@ typedef union {
 	unsigned char valor_string[4];
 }Dados;
 
+
+void finalizaServidor(){
+	printf("Fechando cliente Socket e servidorSocket...\n");
+	close(clienteSocket);
+	close(servidorSocket);
+}
+
 void trataRequisicao(int clienteSocket) {
-	printf("Chegou\n");
+	novoRegistro();
 	char buffer[16];
 	int tamanhoRecebido;
 
@@ -27,7 +35,7 @@ void trataRequisicao(int clienteSocket) {
 	switch(buffer[0]){
 		// temperatura e umidade
 		case '0': ;
-			printf("Temperatura\n");
+			printf("Temperatura e Humidade\n");
 			// Dados temp, umi;
 			TempUmidade tempUmidade = valorTemperaturaUmidade();
 			float temp = 0;
@@ -42,26 +50,34 @@ void trataRequisicao(int clienteSocket) {
 			sprintf(teste, "%.3f", umi);
    		memcpy(&buffer[4], teste,4);
 			tamanhoRecebido = 8;
+			registrarLog("TempUmi",'*');
 			break;
 
 		// Lampadas
 		case '1': ;
-			// enviarIntensidadePWM(pino,intencidade);
-			printf("Lampada endreco %d intencidade: %d\n",pino,intencidade);
+			enviarIntensidadePWM(pino,intencidade);
+			printf("Lampada: endereco %d intencidade: %d\n",pino,intencidade);
 			strcpy(buffer, SUCESSO);
 			tamanhoRecebido=3;
+			char aux[7];
+			strcpy(aux, "Lamp-");
+			aux[5] = buffer[1];
+			registrarLog(aux,buffer[2]);
+			
 			break;
 		// Ar-condicionado
 		case '2': ;
 			if(buffer[1] == 'A'){
 				pino = 23;
+				registrarLog("Ar-Q1",buffer[2]);
 			}
 			else{
 				pino = 24;
+				registrarLog("Ar-Q2",buffer[2]);
 			}
-			// enviarIntensidadePWM(pino, intencidade);
-			printf("Endereco ar: %d\n",pino);
-			printf("Ar-condicionado intencidade: %d\n",intencidade);
+			enviarIntensidadePWM(pino, intencidade);
+			// printf("Endereco ar: %d\n",pino);
+			printf("Ar-condicionado: pino %d intencidade: %d\n",pino,intencidade);
 			strcpy(buffer, SUCESSO);
 			tamanhoRecebido=3;
 			break;
@@ -72,17 +88,20 @@ void trataRequisicao(int clienteSocket) {
 				printf("Error: Algum sensor de presenca está com acionado\n");
 				strcpy(buffer, ERROR);
 				tamanhoRecebido=6;
+				registrarLog("Alarme",'*');
 			}
 			else{
 				if(monitorarTodosPinos() < 0){
 					printf("Erro ao ativar monitoramento");
 					strcpy(buffer, ERROR);
 					tamanhoRecebido=6;
+					registrarLog("Alarme",'1');
 
 				}else{
 					printf("Alarme ativado\n");
 					strcpy(buffer, SUCESSO);
 					tamanhoRecebido=3;
+					registrarLog("Alarme",'0');
 				}
 				
 			}

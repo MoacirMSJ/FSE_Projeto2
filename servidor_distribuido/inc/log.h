@@ -6,11 +6,11 @@
 #include "tipos.h"
 
 
-#define ARQUIVO "./logs.csv"
+#define ARQUIVO "./data/logs.csv"
 FILE *arq;
 
 void novoRegistro();
-void registrarLog( DadosUart dados, float tExterna, float tUsuario, PidDados pid);
+void registrarLog(char *requisicao, char comando);
 void fecharArquivoLog();
 
 

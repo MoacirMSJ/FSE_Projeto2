@@ -1,38 +1,24 @@
-start:temp main clear
+main:servidor mon i2c gpio 
+	gcc -I./inc  main.c ./obj/*.o  -lwiringPi -o ./bin/bin
+	# gcc -I./src  main.c ./obj/log.o ./obj/lcd.o ./obj/pid.o -o ./obj/bin -lwiringPi
 
-main:servidor
-	gcc -I./lib  main.c ./temp/*.o -o ./obj/bin
-	# gcc -I./lib  main.c ./temp/log.o ./temp/lcd.o ./temp/pid.o -o ./obj/bin -lwiringPi
+servidor: diversos log
+	gcc -I./inc -c ./src/servidor.c -o ./obj/servidor.o
 
-servidor:
-	gcc -c ./lib/servidor.c -o ./temp/servidor.o
+mon:
+	gcc -I./inc -c ./src/monitoramento.c -o ./obj/monitoramento.o
 
-temp:
-	mkdir ./temp
 
 log:
-	gcc -c ./lib/log.c -o ./temp/log.o
+	gcc -I./inc -c ./src/log.c -o ./obj/log.o
 
-lcd:
-	gcc -c ./lib/lcd.c -o ./temp/lcd.o
 
-pid:
-	gcc -c ./lib/pid.c -o ./temp/pid.o
+i2c:
+	gcc -I./inc -c ./src/i2c.c -o ./obj/i2c.o
 
-bme280:
-	gcc -c ./lib/bme280.c -o ./temp/bme280.o
 
-uart: crc
-	gcc -c ./lib/uart.c -o ./temp/uart.o
-
-crc:
-	gcc -c ./lib/crc16.c -o ./temp/crc.o
-
-pwm:
-	gcc -c ./lib/pwm.c -o ./temp/pwm.o
+gpio:
+	gcc -I./inc -c ./src/gpio.c -o ./obj/gpio.o
 
 diversos:
-	gcc -c ./lib/diversos.c -o ./temp/div.o
-
-clear:
-	rm -rf ./temp
+	gcc -I./inc -c ./src/diversos.c -o ./obj/div.o

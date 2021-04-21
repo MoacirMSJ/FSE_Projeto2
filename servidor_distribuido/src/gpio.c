@@ -1,4 +1,4 @@
-#include "pwm.h"
+#include "gpio.h"
 
 #define SAIDA 0
 #define ENTRADA 1
@@ -35,6 +35,9 @@ int criarPinosPWM(){
   pinMode(SA_JANELA_SALA, INPUT);
   pinMode(SA_JANELA_QUARTO_1, INPUT);
   pinMode(SA_JANELA_QUARTO_2, INPUT);
+
+
+  desligaAparelhos();
   
   return 1;
 }

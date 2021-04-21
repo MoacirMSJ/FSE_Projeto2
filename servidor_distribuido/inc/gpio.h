@@ -1,5 +1,5 @@
-#ifndef PWM_H_
-#define PWM_H_
+#ifndef GPIO_H_
+#define GPIO_H_
 
 #include <stdio.h>
 #include <wiringPi.h>
@@ -25,6 +25,7 @@
 
 
 int criarPinosPWM();
+void desligaAparelhos();
 void enviarIntensidadePWM(int pino, int pid_intensidade);
 int retornarValorPino(int pino);
 void zeraIntensidadePWM(int pino1);
@@ -32,4 +33,4 @@ void desligaTudo();
 int verificaSeSensolesEstaoDesligados();
 
 
-#endif /* PWM_H_ */
+#endif /* GPIO_H_ */

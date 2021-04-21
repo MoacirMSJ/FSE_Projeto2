@@ -2,7 +2,7 @@
 
 
 void notificar(void) {
-  cliente("9:Alarme");
+  clienteMonitoramento("9:Alarme");
 }
 
 
@@ -12,7 +12,7 @@ int monitoraSensorEntrada(int pino) {
     return -1;
   }
 
-  if ( wiringPiISR (pino, INT_EDGE_FALLING, &notificar) < 0 ) {
+  if ( wiringPiISR (pino, INT_EDGE_RISING, &notificar) < 0 ) {
     printf("Erro ao ativar interrucao no pino: %d\n", pino);
     return -1;
   }
@@ -49,7 +49,7 @@ int monitorarTodosPinos(){
 
 }
 
-void cliente(char mensagem){
+void clienteMonitoramento(char *mensagem){
 
 	int clienteSocket;
 	struct sockaddr_in servidorEndereco;
@@ -88,6 +88,5 @@ void cliente(char mensagem){
 		printf("%s\n", buffer);
 	}
 	close(clienteSocket);
-	exit(0);
 
 }

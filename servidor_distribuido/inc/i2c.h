@@ -1,5 +1,5 @@
-#ifndef __BME280__
-#define __BME280__
+#ifndef I2C_H_
+#define I2C_H_
 //
 // BME280 temperature/pressure/humidity sensor
 // prototyping code to read and calculate calibrated values
@@ -40,4 +40,4 @@ int bme280Init(int iChannel, int iAddr);
 int bme280ReadValues(int *T, int *P, int *H);
 TempUmidade dadosTemperaturaHumidade();
 
-#endif // __BME280__
+#endif // I2C_H_

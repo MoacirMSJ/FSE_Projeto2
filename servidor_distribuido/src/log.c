@@ -11,7 +11,7 @@ void novoRegistro(){
   }
   aux= 1;
   //       TU=temperatura defina pelo usuario, R=resistor, V=ventoinha
-  fprintf(arq,"Data, H:M:S, TI, TE, TR, R, V\n");
+  fprintf(arq,"Data, Hora, Requisicao, comando\n");
   fclose(arq);
   aux= -1;
 }
@@ -21,7 +21,7 @@ void novoRegistro(){
 // Data e hora, temperatura interna, temperatura externa, temperatura definida pelo usuário, 
 // valor de acionamento dos atuadores (Resistor e Venoinha em valor percentual)).
 
-void registrarLog(DadosUart dados, float tExterna, float tReferencia, PidDados pid){
+void registrarLog(char *requisicao, char comando){
   time_t t = time(NULL);
   struct tm tm = *localtime(&t);
 
@@ -32,10 +32,8 @@ void registrarLog(DadosUart dados, float tExterna, float tReferencia, PidDados p
     return ;
   }
   aux= 1;
-  fprintf(arq,"%02d/%02d/%02d, %02d:%02d:%02d, %.2f, %.2f, %.2f, %.2f, %.2f\n", tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900, 
-          tm.tm_hour, tm.tm_min, tm.tm_sec,
-          dados.sensorLM35, tExterna, tReferencia,
-          pid.resistencia, pid.ventoinha);
+  fprintf(arq,"%02d/%02d/%02d, %02d:%02d:%02d, %s, %c\n", tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900, 
+          tm.tm_hour, tm.tm_min, tm.tm_sec,requisicao, comando);
 
   fclose(arq);
   aux= -1;

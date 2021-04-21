@@ -1,4 +1,4 @@
-#include "bme280.h"
+#include "i2c.h"
 
 TempUmidade valorTemperaturaUmidade(){
 	TempUmidade temp = dadosTemperaturaHumidade();
@@ -19,13 +19,14 @@ TempUmidade dadosTemperaturaHumidade(){
   TempUmidade result;
 
   if (r != 0)
-	{
-		return -1;
+	{	
+		result.temperatura = -1;
+		return result;
 	}
   bme280ReadValues(&T, &P, &H);
 
   result.temperatura = (float)T/100.0;
-	resutl.umidade = (float)H/1024;
+	result.umidade = (float)H/1024;
 
   return result;
 

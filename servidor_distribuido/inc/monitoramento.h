@@ -1,3 +1,6 @@
+#ifndef MONITORAMENTO_H_
+#define MONITORAMENTO_H_
+
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
@@ -18,4 +21,6 @@ int cliente_Socket;
 void notificar(void);
 int monitoraSensorEntrada(int pino);
 int monitorarTodosPinos();
-void cliente(char *mensagem);
+void clienteMonitoramento(char *mensagem);
+
+#endif // MONITORAMENTO_H_
