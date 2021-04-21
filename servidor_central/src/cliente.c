@@ -6,7 +6,7 @@
 #include <unistd.h>
 
 #define SERVIDOR_PORTA 10126
-#define SERVIDOR_IP "127.0.0.1"
+#define SERVIDOR_IP "192.168.0.4"
 
 void subMenu(){
   printf(" ___________________________\n");
@@ -55,7 +55,7 @@ void imprimeTemperaturaUmidade(char *tempUmi){
   }
 }
 
-void cliente(char *mens, int clienteUsuario) {
+char cliente(char *mens, int clienteUsuario) {
 	int clienteSocket;
 	struct sockaddr_in servidorAddr;
 	char *mensagem;
@@ -103,5 +103,6 @@ void cliente(char *mens, int clienteUsuario) {
     
   }
   close(clienteSocket);
+  return buffer[0];
   
 }

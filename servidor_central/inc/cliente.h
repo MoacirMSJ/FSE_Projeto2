@@ -13,6 +13,7 @@
 typedef struct entrada{
   char nome_aparelho[20];
   char instrucao[4];
+  int posicao_vetor;
 } Entrada;
 
 
@@ -30,7 +31,7 @@ pthread_t thread_cliente_usuario, thread_cliente_temp_umi;
 
 pthread_mutex_t chave;
 
-void cliente(char *mensagem, int tipoUsuario);
+char cliente(char *mensagem, int tipoUsuario);
 // void clienteUsuario(char *mensagem);
 
 
