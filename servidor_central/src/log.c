@@ -1,4 +1,5 @@
 #include "log.h"
+#include <stdlib.h>
 
 int aux = -1;
 
@@ -24,17 +25,21 @@ void novoRegistro(){
 void registrarLog(char *aparelho ,char comando, char resposta){
   time_t t = time(NULL);
   struct tm tm = *localtime(&t);
-  char com[4], res[6];
+  char *com, *res;
   if(comando == '0'){
+    com = calloc(4,sizeof(char));
     strcat(com,"off");
   }
   else{
+    com = calloc(3,sizeof(char));
     strcat(com,"on");
   }
   if(resposta == 'O'){
+    res = calloc(3,sizeof(char));
     strcat(res,"ok");
   }
   else{
+    res = calloc(6,sizeof(char));
     strcat(res,"falha");
   }
 
@@ -50,6 +55,8 @@ void registrarLog(char *aparelho ,char comando, char resposta){
           aparelho, com, res);
 
   fclose(arq);
+  free(res);
+  free(com);
   aux= -1;
 }
 

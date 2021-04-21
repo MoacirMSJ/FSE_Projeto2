@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include "diversos.h"
+#include "log.h"
 
 
 int main(){
-
+  novoRegistro();
   signal(SIGINT,finaliza); 
   signal(SIGTSTP, abreMenu);
   pthread_create(&teste, NULL,solicitaTempUmidade,NULL);
