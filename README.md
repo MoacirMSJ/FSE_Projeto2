@@ -2,8 +2,9 @@
 
 ## Objetivo
 
-O objetivo deste trabalho é implementar um sistema distribuído,funcionando em conjunto com placas Raspbarry pi, de automação residencial para o monitoramento, acionando sensores e dispositvos. Cada Raspberry executará um servidor chamado de central e distribuído.
-  
+O objetivo deste trabalho é implementar um sistema distribuído,funcionando em conjunto com placas Raspbarry pi, de automação residencial para o monitoramento, acionando sensores e dispositvos. Cada Raspberry executará um servidor chamado de central e outro distribuído.
+
+## Servidores
   O **servidor Central** é composto por até dois clientes e um servidor:
    - Um cliente é responsável por solicitar dados de temperatura ao servidor distribuído a cada 1 segundo.
    - O segundo cliente é reponsável por enviar comandos do usuário como acionamento de lampadas, ar-condicionados ou ligar alarme. 
@@ -12,6 +13,17 @@ O objetivo deste trabalho é implementar um sistema distribuído,funcionando em 
   O **servidor Distribuído** é composto por um servidor e pode criar um cliente.
   - Servidor é responsável por receber as mensagens vindas do servidor central e executar o acionamento, leitura de sensore ou criar uma interrupção para monitoramento de sensores de abertura e presença.
   - Cliente é criando quando há um solicitação de alarme onde os sensores de entrada e presença são monitorados, havendo uma mudança de estado nesses sensores esse cliente é criado e uma mensagem é enviada ao servidor central.
+
+## Imagens
+### Servidor Central
+#### Tela inicial
+![Tela inicial](./img/img1.jpg)
+#### Menu
+![Menu](./img/img2.jpg)
+
+### Servidor Distribuído
+#### Requisições
+![Log](./img/img3.jpg)
 
 ## Instruções de Uso
 

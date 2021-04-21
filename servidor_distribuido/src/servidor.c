@@ -35,7 +35,7 @@ void trataRequisicao(int clienteSocket) {
 	switch(buffer[0]){
 		// temperatura e umidade
 		case '0': ;
-			printf("Temperatura e Humidade\n");
+			printf("Temperatura e Umidade\n");
 			// Dados temp, umi;
 			TempUmidade tempUmidade = valorTemperaturaUmidade();
 			float temp = 0;
